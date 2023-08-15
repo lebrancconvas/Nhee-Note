@@ -1,13 +1,13 @@
 <script lang="ts">
   // your script goes here
   import Dialog from '$lib/Dialog.svelte';
-  import { goto } from '$app/navigation';
+  import { title, description, price } from '../store';
   import type { IDebt } from '../@types';
   let debtList: IDebt[] = [];
 
-  let title = '';
-  let description = '';
-  let price = 0;
+  let titleData = '';
+  let descriptionData = '';
+  let priceData = 0;
 
   let addDialog = false;
 
@@ -15,13 +15,36 @@
     addDialog = true;
   }
 
+  function validateDialog(title: string, price: number): boolean {
+    if(title === '') {
+      alert('Please fill all required fields');
+      return false
+    }
+
+    if(price <= 0) {
+      alert('Price cannot be 0 or less than 0');
+      return false
+    }
+
+    return true;
+  }
+
   function submit() {
+    if(!validateDialog(titleData, priceData)) {
+      return;
+    }
+
+    title.subscribe((val) => titleData = val);
+    description.subscribe((val) => descriptionData = val);
+    price.subscribe((val) => priceData = val);
+
     const newDebt: IDebt = {
-      title,
-      description,
-      price,
+      title: titleData,
+      description: descriptionData,
+      price: priceData,
       createdAt: new Date().toLocaleDateString(),
     };
+
     debtList = [...debtList, newDebt];
     closeDialog();
   }
