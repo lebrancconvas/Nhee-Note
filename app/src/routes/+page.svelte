@@ -5,11 +5,29 @@
   import type { IDebt } from '../@types';
   let debtList: IDebt[] = [];
 
+  let title = '';
+  let description = '';
+  let price = 0;
+
   let addDialog = false;
 
   function addNewNote() {
-    // addDialog = false;
-    goto('/add');
+    addDialog = true;
+  }
+
+  function submit() {
+    const newDebt: IDebt = {
+      title,
+      description,
+      price,
+      createdAt: new Date().toLocaleDateString(),
+    };
+    debtList = [...debtList, newDebt];
+    closeDialog();
+  }
+
+  function closeDialog() {
+    addDialog = false;
   }
 
 </script>
@@ -46,7 +64,13 @@
     </section>
     {#if addDialog}
     <section id="dialog-section">
-      <Dialog />
+      <div id="dialog-container">
+        <Dialog />
+        <div id="dialog-action">
+          <button on:click={submit}>Submit</button>
+          <button on:click={closeDialog}>Close</button>
+        </div>
+      </div>
     </section>
     {/if}
     <section id="action-section">
@@ -98,6 +122,13 @@
   #add-new-note-button {
     background-color: rgb(255, 164, 37);
     font-size: 14px;
+  }
+
+  #dialog-container {
+    outline: 2px solid black;
+    margin: 0 auto;
+    width: 50%;
+    height: 100px;
   }
 
   footer {
