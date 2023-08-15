@@ -126,9 +126,11 @@
 
   #dialog-container {
     outline: 2px solid black;
+    z-index: 99;
     margin: 0 auto;
     width: 50%;
     height: 100px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
   }
 
   footer {
