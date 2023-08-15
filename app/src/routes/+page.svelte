@@ -1,5 +1,13 @@
 <script>
   // your script goes here
+  let debtList = [
+    {
+      title: '',
+      description: '',
+      price: 0,
+      createdAt: ''
+    }
+  ];
 </script>
 
 <svelte:head>
@@ -11,8 +19,29 @@
     <h1>Nhee Note</h1>
   </header>
   <main>
+    <section id="debt-section">
+      <!-- Create Table -->
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Created At</th>
+        </tr>
+        {#each debtList as debt, index}
+        <tr>
+          <td>{index + 1}</td>
+          <td>{debt.title}</td>
+          <td>{debt.description}</td>
+          <td>{debt.price}</td>
+          <td>{debt.createdAt}</td>
+        </tr>
+        {/each}
+      </table>
+    </section>
     <section id="action-section">
-      <button>Add New Note</button>
+      <button id="add-new-note-button">Add New Note</button>
     </section>
   </main>
   <footer>
@@ -31,6 +60,15 @@
 
   header {
     text-align: center;
+    margin-bottom: 20px;
+  }
+
+  main {
+    text-align: center;
+  }
+
+  table {
+    margin: 0 auto;
   }
 
   button {
@@ -43,6 +81,11 @@
 
   button:active {
     transform: scale(0.98);
+  }
+
+  #add-new-note-button {
+    background-color: rgb(255, 164, 37);
+    font-size: 14px;
   }
 
   footer {
