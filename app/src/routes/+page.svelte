@@ -1,13 +1,17 @@
-<script>
+<script lang="ts">
   // your script goes here
-  let debtList = [
-    {
-      title: '',
-      description: '',
-      price: 0,
-      createdAt: ''
-    }
-  ];
+  import Dialog from '$lib/Dialog.svelte';
+  import { goto } from '$app/navigation';
+  import type { IDebt } from '../@types';
+  let debtList: IDebt[] = [];
+
+  let addDialog = false;
+
+  function addNewNote() {
+    // addDialog = false;
+    goto('/add');
+  }
+
 </script>
 
 <svelte:head>
@@ -40,8 +44,13 @@
         {/each}
       </table>
     </section>
+    {#if addDialog}
+    <section id="dialog-section">
+      <Dialog />
+    </section>
+    {/if}
     <section id="action-section">
-      <button id="add-new-note-button">Add New Note</button>
+      <button id="add-new-note-button" on:click={addNewNote}>Add New Note</button>
     </section>
   </main>
   <footer>
@@ -69,6 +78,9 @@
 
   table {
     margin: 0 auto;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    padding: 7px;
   }
 
   button {
