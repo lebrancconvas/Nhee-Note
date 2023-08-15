@@ -11,7 +11,9 @@
     <h1>Nhee Note</h1>
   </header>
   <main>
-
+    <section id="action-section">
+      <button>Add New Note</button>
+    </section>
   </main>
   <footer>
     <p>Copyright 2023, Made by <a href="https://github.com/lebrancconvas">Poom Yimyuean (@lebrancconvas)</a></p>
@@ -29,6 +31,18 @@
 
   header {
     text-align: center;
+  }
+
+  button {
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  button:active {
+    transform: scale(0.98);
   }
 
   footer {
