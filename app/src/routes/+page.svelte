@@ -1,7 +1,5 @@
 <script lang="ts">
   // your script goes here
-  import Dialog from '$lib/Dialog.svelte';
-  import { title, description, price } from '../store';
   import type { IDebt } from '../@types';
   let debtList: IDebt[] = [];
 
@@ -33,10 +31,6 @@
     if(!validateDialog(titleData, priceData)) {
       return;
     }
-
-    title.subscribe((val) => titleData = val);
-    description.subscribe((val) => descriptionData = val);
-    price.subscribe((val) => priceData = val);
 
     const newDebt: IDebt = {
       title: titleData,
@@ -88,7 +82,16 @@
     {#if addDialog}
     <section id="dialog-section">
       <div id="dialog-container">
-        <Dialog />
+        <div>
+          <label for="title">Title</label>
+          <input type="text" name="title" id="input-title" bind:value={titleData}>
+
+          <label for="description">Description</label>
+          <input type="text" name="description" id="input-description" bind:value={descriptionData}>
+
+          <label for="price">Price</label>
+          <input type="number" name="price" id="input-price" bind:value={priceData}>
+        </div>
         <div id="dialog-action">
           <button on:click={submit}>Submit</button>
           <button on:click={closeDialog}>Close</button>
@@ -140,6 +143,12 @@
 
   button:active {
     transform: scale(0.98);
+  }
+
+  input {
+    outline: none;
+    border: none;
+    font-size: 16px;
   }
 
   #add-new-note-button {

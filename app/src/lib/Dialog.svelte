@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { title, description, price } from '../store';
+  import { writable } from 'svelte/store';
+
+  export const title = writable('');
+  export const description = writable('');
+  export const price = writable(0);
 
   let titleData = '';
   let descriptionData = '';
