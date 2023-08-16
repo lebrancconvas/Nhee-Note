@@ -44,6 +44,9 @@
   }
 
   function closeDialog() {
+    titleData = '';
+    descriptionData = '';
+    priceData = 0;
     addDialog = false;
   }
 
